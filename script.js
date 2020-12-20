@@ -26,12 +26,21 @@ function removeItem(toRemove){
 
 function addItem(){
     boxvalue = document.getElementById("box").value;
+    let skip = false;
     if (boxvalue != ""){
-        list_arr.push(boxvalue);
-        document.getElementById("listalerts").innerHTML = "Added!";
-        console.log(boxvalue);
-        console.log(list_arr);    
-        updateList();
+        list_arr.forEach (function (item){
+            if (item == boxvalue){
+                document.getElementById("listalerts").innerHTML = "Cannot put duplicate item in list";
+                skip = true;
+            };
+        });
+        if (skip == false){
+            list_arr.push(boxvalue);
+            document.getElementById("listalerts").innerHTML = "Added!";
+            console.log(boxvalue);
+            console.log(list_arr);    
+            updateList();    
+        }
     } else {
         document.getElementById("listalerts").innerHTML = "Input cannot be empty!";
     }
